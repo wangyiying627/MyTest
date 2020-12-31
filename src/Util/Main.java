@@ -1,7 +1,6 @@
 package Util;
 
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -14,24 +13,34 @@ import java.util.Objects;
  */
 public class Main {
     public static void main(String[] args) {
-        List<Box> boxes = new ArrayList<>(10);
-        boxes.add(nextBox(null));
+        List<Box> boxesList = new ArrayList<>(10);
+        boxesList.add(nextBox(null));
         for (int i = 0; i < 10; i++) {
-            Box box = boxes.get(i);
+            Box box = boxesList.get(i);
             if (openBox(box)) {
                 System.out.println(box.toString());
             }
-            boxes.add(nextBox(box));
+            boxesList.add(nextBox(box));
         }
     }
 
+    /**
+     * 获取下个宝箱
+     * @param preBox
+     * @return
+     */
     static Box nextBox(Box preBox) {
         if (Objects.isNull(preBox)) {
-            return new Box(1, System.currentTimeMillis(), "", "0", 0);
+            return new Box(1, "", "0", 0);
         }
-        return new Box(++preBox.idx, System.currentTimeMillis(), "", preBox.hash, 0);
+        return new Box(++preBox.idx, "", preBox.hash, 0);
     }
 
+    /**
+     * 开箱验密
+     * @param box
+     * @return
+     */
     static boolean openBox(Box box) {
 
         while (box.secNo < Long.MAX_VALUE) {
@@ -45,6 +54,11 @@ public class Main {
         return false;
     }
 
+    /**
+     *宝箱hash算法
+     * @param box
+     * @return
+     */
     static String hash(Box box) {
         String toHashStr = String.format("%d%s%d", box.idx, box.preHash, box.secNo);
         String res = null;

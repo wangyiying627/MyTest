@@ -1,16 +1,18 @@
 package Util;
 
-class Box {
+/**
+ * @author 王艺颖
+ * 宝箱实体
+ */
+public class Box {
     int idx;
-    long stamp;
     String hash;
     String preHash;
     long secNo;
 
-    public Box(int idx, long stamp, String hash, String preHash, long secNo) {
+    public Box(int idx, String hash, String preHash, long secNo) {
         super();
         this.idx = idx;
-        this.stamp = stamp;
         this.hash = hash;
         this.preHash = preHash;
         this.secNo = secNo;
@@ -18,7 +20,7 @@ class Box {
 
     @Override
     public String toString() {
-        return "Box [idx=" + idx + ", stamp=" + stamp + ", hash=" + hash + ", preHash=" + preHash + ", secNo=" + secNo
+        return "Box [idx=" + idx + ", hash=" + hash + ", preHash=" + preHash + ", secNo=" + secNo
                 + "]";
     }
 }
